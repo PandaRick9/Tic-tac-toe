@@ -13,7 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.util.ArrayList;
 
-
+//TODO game design
 
 public class JavaFX extends Application{
     public static int countMove = 0;
