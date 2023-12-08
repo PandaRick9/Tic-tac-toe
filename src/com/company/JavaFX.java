@@ -11,9 +11,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+
+
 import java.util.ArrayList;
 
 //TODO game design
+//TODO draw logic
 
 public class JavaFX extends Application{
     public static int countMove = 0;
@@ -33,6 +37,9 @@ public class JavaFX extends Application{
     static int LogicGame(Button first, Button second, Button third, Button fourth, Button five, Button six, Button seven,
                          Button eight, Button nine, Stage stage){
         int result;
+        countMove++;
+        if(countMove == 9)
+            Draw(stage);
 
         if(first.getText().equals("X") && second.getText().equals("X") && third.getText().equals("X")) {
             P1WinNewScene(stage);
@@ -85,15 +92,15 @@ public class JavaFX extends Application{
             result = 2;
             P2WinNewScene(stage);
         }
-        else
+        else {
             result = 0;
-        countMove++;
-        if(countMove == 9)
-            Draw(stage);
+        }
+
         return result;
     }
     static void P1WinNewScene(Stage stage){
         stage.close();
+        countMove = 0;
         Text text = new Text("Krestik Win");
         Button buttonRestart = new Button("Restart");
 
@@ -114,6 +121,7 @@ public class JavaFX extends Application{
     }
     static void P2WinNewScene(Stage stage){
         stage.close();
+        countMove = 0;
         Text text = new Text("Nolik Win");
         Button buttonRestart = new Button("Restart");
 
@@ -142,6 +150,46 @@ public class JavaFX extends Application{
         return imageView;
 
     }
+    private static ImageView displayStartButton(Stage stage){
+        Image image = new Image("file:///D:\\tic-tac-toe\\src\\com\\company\\STARTIK.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setImage(image);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(200);
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                GridPane root = new GridPane();
+                ArrayList<Button> board = CreateBoard(root, stage);
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+            }
+        });
+        return imageView;
+    }
+    private static ImageView displayExitButton(Stage stage){
+        Image image = new Image("file:///D:\\tic-tac-toe\\src\\com\\company\\EXIT.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setImage(image);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(200);
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                stage.close();
+            }
+        });
+        return imageView;
+    }
+    private static ImageView displayLogo(Stage stage){
+        Image image = new Image("file:///D:\\tic-tac-toe\\src\\com\\company\\Logo.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setImage(image);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(300);
+        return imageView;
+    }
+
     private static ImageView displayNolik(){
         Image image = new Image("file:///D:\\tic-tac-toe\\src\\com\\company\\NOLIK.png");
         ImageView imageView = new ImageView(image);
@@ -443,6 +491,7 @@ public class JavaFX extends Application{
     }
     static void Draw(Stage stage){
         stage.close();
+        countMove = 0;
         Text text = new Text("Draw");
         Button buttonRestart = new Button("Restart");
 
@@ -466,29 +515,21 @@ public class JavaFX extends Application{
 
     static void StartMenu(Stage stage){
         stage.close();
-        Label label = new Label("Game");
-        Button buttonStart = new Button("Start");
+
         Button buttonExit = new Button("Exit");
-        VBox root = new VBox(10, label, buttonStart, buttonExit);
+        VBox root = new VBox(10,displayLogo(stage), displayStartButton(stage), displayExitButton(stage));
+        Image img = new Image(
+                "file:///D:\\tic-tac-toe\\src\\com\\company\\ramka.png");
+        BackgroundImage bImg = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100,300,true,true,true,true));
+        Background bGround = new Background(bImg);
+        root.setBackground(bGround);
         root.setAlignment(Pos.CENTER);
         Scene scene1 = new Scene(root, 450, 450);
+
         stage.setScene(scene1);
         stage.show();
-        buttonStart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                GridPane root = new GridPane();
-                ArrayList<Button> board = CreateBoard(root, stage);
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-            }
-        });
-        buttonExit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                stage.close();
-            }
-        });
+
 
     }
 }
