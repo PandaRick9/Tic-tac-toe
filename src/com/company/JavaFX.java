@@ -1,7 +1,6 @@
 package com.company;
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -16,8 +15,6 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
-//TODO game design
-//TODO draw logic
 
 public class JavaFX extends Application{
     public static int countMove = 0;
