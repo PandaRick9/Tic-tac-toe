@@ -11,8 +11,6 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-
-
 import java.util.ArrayList;
 
 
@@ -182,8 +180,8 @@ public class JavaFX extends Application{
         Image image = new Image("file:///D:\\tic-tac-toe\\src\\com\\company\\Logo.png");
         ImageView imageView = new ImageView(image);
         imageView.setImage(image);
-        imageView.setFitHeight(70);
-        imageView.setFitWidth(300);
+        imageView.setFitHeight(180);
+        imageView.setFitWidth(390);
         return imageView;
     }
 
